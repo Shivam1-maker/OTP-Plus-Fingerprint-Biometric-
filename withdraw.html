@@ -1,0 +1,77 @@
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <title>Welcome!</title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+   </head>
+   
+   <body>
+   <div class="col-md-10 my-3" align="right">
+                           <input type="button" class="btn btn-info" value="Logout" onclick="window.location.href='/';">
+                        </div>
+      <div class="container my-3">
+         <div class="card">
+            <div class="card-body">
+               <div class="alert alert-info">
+                  <h3 align="center"> ATM </h3>
+               </div>
+               <div class="col-md-10">
+                  <form saction="#" th:action="@{/withdraw?accountNumber={accountNumber}(accountNumber=${accountNumber})}" method="post" enctype="multipart/form-data">
+                     <div class="row">
+                        <div class="form-group col-md-8">
+                           <label for="amount" class="col-form-label">Amount</label>
+                           <input type="number" class="form-control" name="amount" placeholder="Enter Amount" min="100" max="20000" step="100" required>
+                        </div>
+                        <div class="form-group col-md-8">
+                           <label for="finger" class="col-form-label">Fingerprint</label>
+                           <input type="file"  class="form-control-file" name="finger" placeholder="Finger Print" required>
+                        </div>
+                        <div class="col-md-6" align="center">
+                           <input type="submit" class="btn btn-info" value="Withdraw">
+                        </div>
+                     </div>
+                  </form>
+                          <div class="alert alert-primary my-3" th:style="${message!=null ? 'display:block' : 'display:none'}">
+                       <p th:text=" ${message} " />
+  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="form-group col-md-8"></div>
+      <div class="container my-3">
+         <div class="card">
+            <div class="card-body">
+               <div class="alert alert-info">
+                  <h3 align=center> Transactions </h3>
+               </div>
+               <div th:switch="${transactions}" class="container my-5" align="center">
+                  <div class="col-md-10">
+                     <h2 th:case="null">No Transactions yet!</h2>
+                     <div th:case="*">
+                        <table class="table table-bordered table-responsive-md">
+                           <thead class="thead-light">
+                              <tr>
+                                 <th>Transaction ID</th>
+                                 <th>Date Time</th>
+                                 <th>Amount</th>
+                                 <th>Type</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                              <tr th:each="transaction : ${transactions}">
+                                 <td th:text="${transaction.id}"></td>
+                                 <td th:text="${transaction.date}"></td>
+                                 <td th:text="${transaction.amount}"></td>
+                                 <td th:text="${transaction.type}"></td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

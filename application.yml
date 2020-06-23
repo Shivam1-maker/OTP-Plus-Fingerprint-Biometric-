@@ -1,0 +1,14 @@
+pod:
+  name: 'name of the pod'
+  namespace: 'namespace of the pod'
+service:
+  name: 'get from env variable'
+  
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost/softbank
+  jpa:
+    hibernate:
+      ddl-auto: update
